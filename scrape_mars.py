@@ -8,6 +8,7 @@
 import pandas as pd
 from bs4 import BeautifulSoup as bs
 from splinter import Browser
+from selenium import webdriver
 import requests
 
 
@@ -130,13 +131,17 @@ def scrape():
         image_url= HemisphereURL+ title1 +'.tif/full.jpg'
         hemisphere_image_urls.append({'title' : title ,'image_url' : image_url})
         
-    FinalResults["Latest_Title"]=Latest_Title
-    FinalResults["Latest_Title_Para"]=Latest_Title_Para
-    FinalResults["Feat_image_loc"]=image_loc
-    FinalResults["Mars_weather"]=mars_weather
-    FinalResults["MarsFacts_html_table"]=MarsFacts_html_table
-    FinalResults["Hemisphere_image_urls"]=hemisphere_image_urls
+    finalresults = {
+        "latesttitle": Latest_Title,
+        "latesttitlepara": Latest_Title_Para,
+        "featimageLoc": image_loc,
+        "marsweather": mars_weather,
+        "marsfactshtmltable" : MarsFacts_html_table,
+        "hemisphereimageurls" : hemisphere_image_urls
+        
+    }
+    
    
-    return FinalResults
-scrape()
-print(scrape.FinalResults)   
+    return finalresults
+
+ 
