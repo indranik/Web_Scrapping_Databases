@@ -1,8 +1,11 @@
-.BannerTitle {text-align:center; 
+.BannerTitle { 
          padding: 0px;
          margin: 0px;}
 
 #Banner {padding: 10px;
         margin: 10px;}
-#LatestNews{margin-left: 10px}
+#LatestNews{margin-left: 10px;}
+.img-responsive{display: block; margin-left: 50px;padding-top: 15px;
+        padding-bottom: 15px;}
+        
 

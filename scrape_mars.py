@@ -82,7 +82,16 @@ def scrape():
     twitter_soup = bs(twitter_html, 'html.parser')
     #print(twitter_soup)
     results = twitter_soup.find_all('ol',{"id": "stream-items-id"})
-    mars_weather = results[0].find_all('p',class_="TweetTextSize TweetTextSize--normal js-tweet-text tweet-text")[0].text
+    weatherTweetFound = False
+    cnt = 0
+    
+    while (weatherTweetFound == False):
+        mars_weather = results[0].find_all('p',class_="TweetTextSize TweetTextSize--normal js-tweet-text tweet-text")[cnt].text
+        if (mars_weather.split()[0]) == "Sol":
+            weatherTweetFound = True
+        else:
+            weatherTweetFound = False
+            cnt = cnt+1
     #print(mars_weather)
     
     
@@ -99,7 +108,10 @@ def scrape():
     MarsFactdf.columns = MarsFactdf.columns.map(str)
     MarsFactdf = MarsFactdf.rename( columns={"0": "Decscription", "1": "Value"})
     MarsFactdf.set_index('Decscription',inplace=True)
+   
+   # MarsFacts_html_table = MarsFactdf.to_html(escape = False).strip()
     MarsFacts_html_table = MarsFactdf.to_html()
+    #MarsFacts_html_table = MarsFacts_html_table.replace("\n", "")
     #MarsFactdf.to_html('MarsFacts_html_table')
     
     
@@ -140,8 +152,9 @@ def scrape():
         "hemisphereimageurls" : hemisphere_image_urls
         
     }
+   # print(hemisphere_image_urls[0]["image_url"])
     
    
     return finalresults
 
- 
+

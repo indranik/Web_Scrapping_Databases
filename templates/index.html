@@ -4,28 +4,31 @@
 <head>
   <meta charset="UTF-8">
   <title>Mission to Mars</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </head>
 <body>
+        
   <div class="container-fluid"> 
     <div class="row">
-      <div class="jumbotron jumbotron-fluid" id = Banner>
+      <div class="jumbotron jumbotron-fluid text-center" id = Banner>
           <h1 class="BannerTitle">Mission to Mars</h1>
           <p class="text-center">
           <a class="btn btn-primary btn-lg" id = "scrapeButton" href = "/scrape" role="button">Scrape New Data</a>
           </p>
 
         </div>
-      
+    
     </div>
+    {% for finalresults in finalresults %} 
     <div class="row" id ="LatestNews">
-        <h3>Latest Mars News</h3>
-        <p {{finalresults.latesttitle}} ></p>
-        <p id = "NewsContent"{{finalresults.latesttitlepara}}></p>
+        <div class="col-sm-12 col-md-8" id ="News1">
+        <strong><h3>Latest Mars News</h3></strong>
+        <strong><h4>{{finalresults.latesttitle}} </h4></strong>
+        <p>{{finalresults.latesttitlepara}}</p>
+        </div>
     </div>
 
     <div class="row" id ="ImageWeatherTable">
@@ -44,7 +47,7 @@
                   
                   <div class="row" id ="FeatImage">
                       <a href="#">
-                          <img class="img-responsive" id= "FeaturedImage" src= {{finalresults.featimageloc}} alt="BJGDJSG">
+                          <img class="img-responsive center-block"src= {{finalresults.featimageLoc}} alt="Featured Image">
                         </a>
                      
                   </div>
@@ -69,29 +72,38 @@
                       <div class="row" id = "vizRow1">
 
                           <div class="col-xs-12 col-sm-12 col-md-12">
-                              <h4>Current Weather on Mars</h4>
-                              <p id = "CurrentConditions"{{finalresults.marsweather}}></p>
-                          </div>
+                              <div>
+                                <h4>Current Weather on Mars</h4>
+                              <p>{{finalresults.marsweather}}</p>
+                            </div>
+                            </div>
                       </div>  
 
                     <div class="row" id = "vizRow1">
 
                         <div class="col-xs-12 col-sm-12 col-md-12">
-                            <h4>Mars Facts</h4>
-                            <table class="table table-striped" id ="FactsTable">
-                                {{finalresults.marsfactshtmltable}}
-                            </table>
+                               <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <strong><div class="panel-title">
+                                        <h4> Mars Facts </h4>
+                                        
+                                        </div></strong>
+                                    </div>
+                            
+                                    <div class="panel-body">
+                            
+                                    {{finalresults.marsfactshtmltable | safe}}
+                                
+                                    </div>  
 
-                  
-                        </div>
-                    </div> 
+                                </div>
+                        </div> 
                       
 
                       
+                    </div>
+
                 </div>
-
-                
-              </div>
         </div>
     </div>
     <div class="row" id ="HemisphereImages">
@@ -100,47 +112,89 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <strong><div class="panel-title">
-                      <h4> Mars Hemispheres</h4>
+                      <h3> Mars Hemispheres</h3>
 
                     </div></strong>
                 </div>
-
-              
                 <div class="panel-body">
-                  <div class="row" id = "HemRow1">
+                    <div class="row" id = "HemRow1">
 
-                      <div class="col-xs-6 col-sm-3 col-md-6">
-                          <a href="#">
-                            <img class="img-responsive" src= {{finalResults.marsfactshtmltable[0][img_url]}} alt="sdfkhd">
-                            </a>
-                      </div>
-
-                      <div class="col-xs-6 col-sm-3 col-md-6">
-                          <a href="#">
-                            <img class="img-responsive" src = "#" alt="BJGDJSG">
-                            </a>
-                      </div>
-                 
-                      <div class="col-xs-6 col-sm-3 col-md-6">
-                          <a href="#">
-                          <img class="img-responsive" src="#" alt="BJGDJSG">
-                          </a>
-                        </div>
+                        <div class="col-xs-6 col-sm-3 col-md-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">  
+                                        <strong><div class="panel-title">
+                                                <h4> {{finalresults.hemisphereimageurls[0].title}}</h4>
                         
-                      <div class="col-xs-6 col-sm-3 col-md-6">
-                          <a href="#">
-                            <img class="img-responsive" src="#" alt="BJGDJSG">
-                            </a>                                                      
-                          
-                      </div>
+                                            </div></strong>
+                                </div>
+                                <div class="panel-body">      
+                                    <a href="#">
+                                    <img class="img-responsive center-block" src= {{finalresults.hemisphereimageurls[0].image_url}} alt="sdfkhd">
+                                    </a>
+                                </div>
 
-                      
-                  </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-3 col-md-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">  
+                                        <strong><div class="panel-title">
+                                                <h4> {{finalresults.hemisphereimageurls[1].title}}</h4>
+                          
+                                              </div></strong>
+                                </div>
+                                <div class="panel-body">      
+                                    <a href="#">
+                                    <img class="img-responsive center-block" src= {{finalresults.hemisphereimageurls[1].image_url}} alt="sdfkhd">
+                                    </a>
+                                </div>
+    
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" id = "HemRow2">
+
+                            <div class="col-xs-6 col-sm-3 col-md-6">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">  
+                                            <strong><div class="panel-title">
+                                                    <h4> {{finalresults.hemisphereimageurls[2].title}}</h4>
+                            
+                                                </div></strong>
+                                    </div>
+                                    <div class="panel-body">      
+                                        <a href="#">
+                                        <img class="img-responsive center-block" src= {{finalresults.hemisphereimageurls[2].image_url}} alt="sdfkhd">
+                                        </a>
+                                    </div>
+    
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-sm-3 col-md-6">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">  
+                                            <strong><div class="panel-title">
+                                                    <h4> {{finalresults.hemisphereimageurls[3].title}}</h4>
+                              
+                                                  </div></strong>
+                                    </div>
+                                    <div class="panel-body">      
+                                        <a href="#">
+                                        <img class="img-responsive center-block" src= {{finalresults.hemisphereimageurls[3].image_url}} alt="sdfkhd">
+                                        </a>
+                                    </div>
+        
+                                </div>
+                            </div>
+                    </div>
 
                 </div>
               </div>
         </div>
     </div>
+    {% endfor %} 
+    </div>
 
-  </div>
+
 </body>
+</html>
