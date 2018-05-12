@@ -1,4 +1,4 @@
-The goal of this assignment is building a web application that scrapes various websites for data related to the Mission to Mars and displays the information in a single HTML page. The following outlines what you need to do.
+The goal of this assignment was building a web application that scrapes various websites for data related to the Mission to Mars and displaying the information in a single HTML page. 
 
 Initial scraping was done using Jupyter Notebook(mission_to_mars.ipynb), BeautifulSoup, Pandas, and Requests/Splinter.
 
@@ -10,7 +10,7 @@ Data Scrapped:
 4. Facts about the planet including Diameter, Mass, etc. from the Mars Facts webpage - https://space-facts.com/mars/
 5. Images of the Mars Hemispheres from USGS Astrogeology site - https://astrogeology.usgs.gov/
 
-Note: Mars Weather twitter account might have re-tweets that do not contain the weather report. Weather reports start with word "Sol". While scrapping tweet stream, not weather related tweets were ignored.
+Note: Mars Weather twitter account might have re-tweets that do not contain the weather report. Weather reports start with word "Sol". While scrapping tweet stream, non weather related tweets were ignored.
 
 HTML/webpage creation :
 
